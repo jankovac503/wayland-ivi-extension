@@ -1649,7 +1649,9 @@ controller_listener_layer_for_child(void *data,
 static void
 controller_listener_surface_for_child(void *data,
                             struct ivi_controller *controller,
-                            uint32_t id_surface)
+                            uint32_t id_surface,
+                            int32_t pid,
+                            const char *title)
 {
     struct wayland_context *ctx = data;
     struct surface_context *ctx_surf = NULL;
@@ -1780,11 +1782,16 @@ controller_listener_layer_for_main(void *data,
 static void
 controller_listener_surface_for_main(void *data,
                             struct ivi_controller *controller,
-                            uint32_t id_surface)
+                            uint32_t id_surface,
+                            int32_t pid,
+                            const char *title)
 {
     struct ilm_control_context *ctx = data;
     struct surface_context *ctx_surf = NULL;
     int32_t is_inside = 0;
+
+    (void)pid;
+    (void)title;
 
     is_inside = wayland_controller_is_inside_surface_list(
                     &ctx->main_ctx.list_surface, id_surface);
