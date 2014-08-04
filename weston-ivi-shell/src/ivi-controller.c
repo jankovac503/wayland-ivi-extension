@@ -960,6 +960,8 @@ controller_layer_set_render_order(struct wl_client *client,
     int i = 0;
     (void)client;
 
+    layoutsurf_array = malloc((id_surfaces->size / sizeof(uint32_t)) * sizeof(struct ivi_layout_surface *));
+
     wl_array_for_each(id_surface, id_surfaces) {
         wl_list_for_each(ivisurf, &ivilayer->shell->list_surface, link) {
             id_layout_surface = ivi_layout_getIdOfSurface(ivisurf->layout_surface);
@@ -971,8 +973,7 @@ controller_layer_set_render_order(struct wl_client *client,
         }
     }
 
-    ivi_layout_layerSetRenderOrder(ivilayer->layout_layer,
-                                   layoutsurf_array, id_surfaces->size);
+    ivi_layout_layerSetRenderOrder(ivilayer->layout_layer, layoutsurf_array, i);
     free(layoutsurf_array);
 }
 
