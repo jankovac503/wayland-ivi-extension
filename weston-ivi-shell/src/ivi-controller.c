@@ -422,7 +422,7 @@ send_surface_event(struct wl_resource *resource,
 {
     if (mask & IVI_NOTIFICATION_OPACITY) {
         ivi_controller_surface_send_opacity(resource,
-                                            prop->opacity);
+                                   wl_fixed_from_double(prop->opacity));
     }
     if (mask & IVI_NOTIFICATION_SOURCE_RECT) {
         ivi_controller_surface_send_source_rectangle(resource,
@@ -596,7 +596,7 @@ send_layer_event(struct wl_resource *resource,
 {
     if (mask & IVI_NOTIFICATION_OPACITY) {
         ivi_controller_layer_send_opacity(resource,
-                                          prop->opacity);
+                                wl_fixed_from_double(prop->opacity));
     }
     if (mask & IVI_NOTIFICATION_SOURCE_RECT) {
         ivi_controller_layer_send_source_rectangle(resource,
@@ -714,7 +714,8 @@ controller_surface_set_opacity(struct wl_client *client,
 {
     struct ivisurface *ivisurf = wl_resource_get_user_data(resource);
     (void)client;
-    ivi_layout_surfaceSetOpacity(ivisurf->layout_surface, (float)opacity);
+    ivi_layout_surfaceSetOpacity(ivisurf->layout_surface,
+                                 wl_fixed_to_double(opacity));
 }
 
 static void
@@ -880,7 +881,8 @@ controller_layer_set_opacity(struct wl_client *client,
 {
     struct ivilayer *ivilayer = wl_resource_get_user_data(resource);
     (void)client;
-    ivi_layout_layerSetOpacity(ivilayer->layout_layer, (float)opacity);
+    ivi_layout_layerSetOpacity(ivilayer->layout_layer,
+                               wl_fixed_to_double(opacity));
 }
 
 static void
