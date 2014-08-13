@@ -66,7 +66,7 @@ struct ivi_layout_interface {
 	void (*initWithCompositor)(struct weston_compositor *ec);
 };
 
-WL_EXPORT struct ivi_layout_interface ivi_layout_interface;
+extern struct ivi_layout_interface ivi_layout_interface;
 
 #ifdef __cplusplus
 } /**/
